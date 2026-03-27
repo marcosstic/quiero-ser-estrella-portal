@@ -1,0 +1,52 @@
+:root{
+  --bg:#fbfbfb;
+  --text:#2f2f2f;
+  --spot:#face10;
+  --lux:#f8e999;
+  --g1:#cbcccb;
+  --g2:#9c9e9c;
+  --g3:#7c7c7c;
+  --cream:#fbf5c9;
+
+  --surface: #fbfbfb;
+  --surface-2: #fbf5c9;
+  --border: #cbcccb;
+
+  --muted: #2f2f2f;
+  --muted-2: #7c7c7c;
+
+  --shadow: 0 20px 60px rgba(47,47,47,.18);
+  --shadow-soft: 0 10px 28px rgba(47,47,47,.14);
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  --space-1: 8px;
+  --space-2: 12px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+
+  --container: 1120px;
+
+  --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New";
+
+  --focus: 0 0 0 3px rgba(250,206,16,.35);
+}
+
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#2f2f2f;
+    --text:#fbfbfb;
+    --surface: rgba(255,255,255,.04);
+    --surface-2: rgba(255,255,255,.06);
+    --border: rgba(203,204,204,.18);
+    --muted: rgba(251,251,251,.75);
+    --muted-2: rgba(251,251,251,.6);
+    --shadow: 0 20px 60px rgba(0,0,0,.35);
+    --shadow-soft: 0 10px 28px rgba(0,0,0,.22);
+  }
+}
