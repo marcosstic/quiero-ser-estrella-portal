@@ -42,6 +42,15 @@
   --card-grad: radial-gradient(circle at 25% 25%, rgba(250,206,16,.15), transparent 70%);
   --panel-grad: linear-gradient(120deg, rgba(251,245,201,.6), rgba(248,233,153,.4));
   --footer-grad: linear-gradient(180deg, rgba(250,206,16,.10) 0%, #fbf5c9 100%);
+
+  /* Glow effect (subtle stage light) */
+  --bg-glow-grad: radial-gradient(ellipse at 50% 0%, rgba(250,206,16,.12), transparent 70%);
+  --bg-glow-anim: glow-pulse 14s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.02); }
 }
 
 @media (prefers-color-scheme: dark){

@@ -7,6 +7,24 @@ body{
   background:var(--bg-grad);
   color:var(--text);
   line-height:1.5;
+  position:relative;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:var(--bg-glow-grad);
+  mix-blend-mode: soft-light;
+  opacity:0.4;
+  pointer-events:none;
+  animation:var(--bg-glow-anim);
+  z-index:0;
+}
+
+body > *{
+  position:relative;
+  z-index:1;
 }
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
@@ -33,4 +51,9 @@ a:hover{text-decoration:underline}
 
 @media (prefers-reduced-motion: reduce){
   *{scroll-behavior:auto !important}
+  body::before{animation:none}
+}
+
+@media (prefers-contrast: high){
+  body::before{opacity:0.15}
 }
