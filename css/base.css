@@ -4,7 +4,7 @@ html{-webkit-text-size-adjust:100%}
 body{
   margin:0;
   font-family:var(--font);
-  background:var(--bg);
+  background:var(--bg-grad);
   color:var(--text);
   line-height:1.5;
 }

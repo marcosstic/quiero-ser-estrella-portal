@@ -147,12 +147,23 @@
   grid-template-columns: 280px 1fr;
   gap:var(--space-4);
   border:1px solid var(--border);
-  background:linear-gradient(180deg, rgba(251,251,251,.98), rgba(251,245,201,.35));
+  background:var(--surface-grad);
   border-radius:var(--radius-lg);
   overflow:hidden;
   box-shadow:var(--shadow-soft);
   transform-style:preserve-3d;
   transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  position:relative;
+}
+
+.featured::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:var(--card-grad);
+  border-radius:inherit;
+  opacity:0.8;
+  pointer-events:none;
 }
 
 .featured:hover,
@@ -177,12 +188,23 @@
 
 .card{
   border:1px solid var(--border);
-  background:rgba(251,251,251,.98);
+  background:var(--surface-grad);
   border-radius:var(--radius-md);
   overflow:hidden;
   box-shadow:var(--shadow-soft);
   transform-style:preserve-3d;
   transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  position:relative;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:var(--card-grad);
+  border-radius:inherit;
+  opacity:1;
+  pointer-events:none;
 }
 
 .card:hover,
@@ -207,8 +229,20 @@
   border:1px solid var(--border);
   border-radius:var(--radius-md);
   padding:16px;
-  background:rgba(251,251,251,.98);
+  background:var(--panel-grad);
+  position:relative;
+  overflow:hidden;
   transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.panel::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:var(--card-grad);
+  border-radius:inherit;
+  opacity:0.7;
+  pointer-events:none;
 }
 
 .panel:hover{
@@ -256,7 +290,16 @@
 
 /* Article template */
 .article-wrap{display:grid; grid-template-columns: 1fr 320px; gap: var(--space-5); align-items:start}
-.article{border:1px solid var(--border); background: rgba(251,251,251,.98); border-radius: var(--radius-lg); overflow:hidden; box-shadow: var(--shadow-soft)}
+.article{border:1px solid var(--border); background: var(--surface-grad); border-radius: var(--radius-lg); overflow:hidden; box-shadow: var(--shadow-soft); position:relative}
+.article::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:var(--card-grad);
+  border-radius:inherit;
+  opacity:0.6;
+  pointer-events:none;
+}
 .article-hero{min-height:220px; background:
   radial-gradient(900px 360px at 30% 35%, rgba(250,206,16,.14), transparent 60%),
   linear-gradient(180deg, rgba(203,204,204,.35), rgba(251,251,251,.65));
