@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin — Quiero Ser Estrella</title>
+  <link rel="stylesheet" href="./css/tokens.css" />
+  <link rel="stylesheet" href="./css/base.css" />
+  <link rel="stylesheet" href="./css/layout.css" />
+  <link rel="stylesheet" href="./css/components.css" />
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="./#/">
+        <span class="brand-logo-wrap" aria-hidden="true">
+          <img class="brand-logo" src="./quieroserestrella-logo.png" alt="" />
+        </span>
+        <span class="brand-text">Quiero Ser Estrella</span>
+      </a>
+
+      <nav class="nav" aria-label="Navegación">
+        <a class="nav-link" href="./#/">Volver al portal</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido" class="section">
+    <div class="container grid-main">
+      <div>
+        <div class="section-header">
+          <h1 class="section-title">Admin (demo)</h1>
+          <a class="section-link" href="./#/">Portal</a>
+        </div>
+
+        <section class="panel">
+          <h2 class="panel-title">Generar JSON de noticia</h2>
+
+          <form id="f" class="form">
+            <div class="cards" style="grid-template-columns:1fr 1fr;">
+              <div>
+                <label class="small" for="titulo">Título</label>
+                <input class="search-input" style="width:100%" id="titulo" name="titulo" required />
+              </div>
+              <div>
+                <label class="small" for="slug">Slug</label>
+                <input class="search-input" style="width:100%" id="slug" name="slug" required />
+              </div>
+              <div>
+                <label class="small" for="categoria">Categoría</label>
+                <input class="search-input" style="width:100%" id="categoria" name="categoria" required />
+              </div>
+              <div>
+                <label class="small" for="subcategoria">Subcategoría</label>
+                <input class="search-input" style="width:100%" id="subcategoria" name="subcategoria" />
+              </div>
+              <div>
+                <label class="small" for="autor">Autor</label>
+                <input class="search-input" style="width:100%" id="autor" name="autor" required />
+              </div>
+              <div>
+                <label class="small" for="fecha">Fecha (YYYY-MM-DD)</label>
+                <input class="search-input" style="width:100%" id="fecha" name="fecha" placeholder="2026-03-26" required />
+              </div>
+              <div style="grid-column:1 / -1">
+                <label class="small" for="imagen">Imagen principal (URL)</label>
+                <input class="search-input" style="width:100%" id="imagen" name="imagen" required />
+              </div>
+              <div style="grid-column:1 / -1">
+                <label class="small" for="resumen">Resumen</label>
+                <textarea class="search-input" style="width:100%;height:90px" id="resumen" name="resumen" required></textarea>
+              </div>
+              <div style="grid-column:1 / -1">
+                <label class="small" for="etiquetas">Etiquetas (separadas por coma)</label>
+                <input class="search-input" style="width:100%" id="etiquetas" name="etiquetas" />
+              </div>
+              <div style="grid-column:1 / -1">
+                <label class="small" for="cuerpo">Cuerpo (HTML)</label>
+                <textarea class="search-input" style="width:100%;height:180px" id="cuerpo" name="cuerpo" required></textarea>
+              </div>
+            </div>
+
+            <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;">
+              <button class="btn btn-primary" type="submit">Generar JSON</button>
+              <a class="btn btn-ghost" href="./#/">Cancelar</a>
+            </div>
+          </form>
+        </section>
+
+        <section class="panel" style="margin-top:16px">
+          <h2 class="panel-title">Salida</h2>
+          <textarea id="out" class="search-input" style="width:100%;height:220px" readonly></textarea>
+        </section>
+      </div>
+
+      <aside class="sidebar" aria-label="Ayuda">
+        <section class="panel">
+          <h2 class="panel-title">Cómo usar</h2>
+          <p class="small">Esto genera un objeto para pegar dentro de <span style="font-family:var(--mono)">js/modules/news-data.js</span>.</p>
+          <p class="small">En producción, estos mismos campos se guardarán en MySQL.</p>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="small">© <span id="year"></span> Quiero Ser Estrella</p>
+      <a class="small" href="./#/">Volver</a>
+    </div>
+  </footer>
+
+  <script type="module">
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+    const f = document.getElementById('f');
+    const out = document.getElementById('out');
+
+    const clean = (s) => String(s || '').trim();
+
+    f.addEventListener('submit', (ev) => {
+      ev.preventDefault();
+
+      const data = new FormData(f);
+      const etiquetas = clean(data.get('etiquetas'))
+        .split(',')
+        .map((x) => clean(x))
+        .filter(Boolean);
+
+      const obj = {
+        id: Date.now(),
+        slug: clean(data.get('slug')),
+        categoria: clean(data.get('categoria')),
+        subcategoria: clean(data.get('subcategoria')),
+        titulo: clean(data.get('titulo')),
+        autor: clean(data.get('autor')),
+        fecha: clean(data.get('fecha')),
+        imagen_principal: clean(data.get('imagen')),
+        resumen: clean(data.get('resumen')),
+        cuerpo_html: clean(data.get('cuerpo')),
+        etiquetas,
+      };
+
+      out.value = JSON.stringify(obj, null, 2);
+      out.focus();
+      out.select();
+    });
+  </script>
+</body>
+</html>

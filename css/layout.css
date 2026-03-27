@@ -1,5 +1,64 @@
 .container{max-width:var(--container);margin:0 auto;padding:0 var(--space-4)}
 
+.top-banner{
+  border-bottom: 1px solid rgba(250,206,16,.55);
+  background: rgba(251,245,201,.78);
+}
+
+.top-banner-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 14px;
+  padding: 10px 0;
+}
+
+.top-banner-text{
+  margin:0;
+  color: rgba(47,47,47,.92);
+  font-size: 14px;
+}
+
+.top-banner-cta{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  color: rgba(47,47,47,.96);
+  background: rgba(251,251,251,.72);
+  border: 1px solid rgba(250,206,16,.45);
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.top-banner-cta::after{
+  content:"";
+  position:absolute;
+  left:12px;
+  right:12px;
+  bottom:8px;
+  height:2px;
+  border-radius:999px;
+  background: rgba(250,206,16,.85);
+  transform: scaleX(0);
+  transform-origin:left;
+  transition: transform 160ms ease;
+}
+
+.top-banner-cta:hover,
+.top-banner-cta:focus-visible{
+  text-decoration:none;
+  background: rgba(250,206,16,.12);
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(47,47,47,.10);
+}
+
+.top-banner-cta:hover::after,
+.top-banner-cta:focus-visible::after{
+  transform: scaleX(1);
+}
+
 .site-header{
   position:sticky;
   top:0;
@@ -103,6 +162,8 @@
     transform:none !important;
   }
   .nav-link::after{transition:none}
+  .top-banner-cta{transition:none; transform:none !important}
+  .top-banner-cta::after{transition:none}
 }
 
 .search{display:flex;gap:10px;align-items:center}
@@ -130,4 +191,20 @@
   .sidebar{position:static}
   .brand{min-width:auto}
   .nav{display:none}
+  .header-inner{gap:12px}
+  .brand-text{font-size:15px}
+  .top-banner-inner{flex-direction:column; align-items:flex-start}
+  .top-banner-cta{width:100%; justify-content:center}
+}
+
+@media (max-width: 420px){
+  .header-inner{flex-wrap:wrap}
+  .brand{width:100%; justify-content:flex-start}
+}
+
+@supports (padding: max(0px)){
+  .container{
+    padding-left: max(var(--space-4), env(safe-area-inset-left));
+    padding-right: max(var(--space-4), env(safe-area-inset-right));
+  }
 }

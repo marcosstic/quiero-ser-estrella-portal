@@ -12,6 +12,9 @@ export function initTiltCards({ reduced } = { reduced: false }){
   const maxZ = 18; // px
 
   for (const el of items){
+    if (el.dataset.tiltInit === '1') continue;
+    el.dataset.tiltInit = '1';
+
     const onMove = (ev) => {
       const r = el.getBoundingClientRect();
       const px = (ev.clientX - r.left) / r.width;
